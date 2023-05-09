@@ -10,7 +10,6 @@ import { UsersModule } from './users/users.module';
     ),
     UsersModule
   ],
-  //imports: [MongooseModule.forRoot('mongodb://localhost/nest'), UsersModule],
   controllers: [],
   providers: []
 })
