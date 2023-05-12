@@ -22,12 +22,15 @@ export class User {
 
   @Prop() // TO DO - reference to another schema 
   following: Array<any>;
+
+  @Prop() // TO DO - reference to another schema 
+  closedFriends: Array<any>;
   
   @Prop({ default: 0 })
   followersQuantity: number;
 
   @Prop({ default: 0 }) 
-  followingQuantity: Array<any>;
+  followingQuantity: number;
 
   @Prop({ default: Date.now() }) 
   createdAt: Date;

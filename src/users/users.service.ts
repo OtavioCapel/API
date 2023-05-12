@@ -13,6 +13,10 @@ export class UsersService {
     return newUser.save();
   }
 
+  findByEmail(email: string) {
+    return this.userModel.findOne({ email }).exec();
+  }
+
   findAll() {
     return this.userModel.find().exec();
   }
