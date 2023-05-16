@@ -4,7 +4,7 @@ import { MessagesHelper } from 'src/shared/helpers/message.helper';
 import { UserResponseDto } from 'src/users/dto/user-response.dto';
 import { User } from 'src/users/entities/user.entity';
 import { UsersService } from '../users/users.service';
-
+import { compare } from 'bcrypt';
 
 @Injectable()
 export class AuthService {
@@ -22,7 +22,8 @@ export class AuthService {
       return null
     }
 
-    if(password !== user.password) return null;
+    const validPassword = await compare(password, user.password)
+    if(!validPassword) return null;
 
     return user;
   }

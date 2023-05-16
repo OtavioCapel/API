@@ -20,13 +20,13 @@ export class User {
   @Prop({ required: true, unique: true })
   username: string;
 
-  @Prop() // TO DO - reference to another schema
+  @Prop({ default: [] }) // TO DO - reference to another schema
   followers: Array<any>;
 
-  @Prop() // TO DO - reference to another schema 
+  @Prop({ default: [] }) // TO DO - reference to another schema 
   following: Array<any>;
 
-  @Prop() // TO DO - reference to another schema 
+  @Prop({ default: [] }) // TO DO - reference to another schema 
   closedFriends: Array<any>;
   
   @Prop({ default: 0 })
