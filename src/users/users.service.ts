@@ -1,9 +1,11 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { UserResponseDto } from './dto/user-response.dto';
 import { User } from './entities/user.entity';
 import { hashSync } from 'bcrypt';
+import { MessagesHelper } from 'src/shared/helpers/message.helper';
+import { UserUpdateDto } from './dto/user-update.dto';
 @Injectable()
 export class UsersService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) { }
@@ -15,11 +17,23 @@ export class UsersService {
     return newUser.save();
   }
 
-  findByEmail(email: string) {
-    return this.userModel.findOne({ email }).exec();
+  async findByEmail(email: string) {
+    return await this.userModel.findOne({ email }).exec();
   }
 
-  findAll() {
-    return this.userModel.find().exec();
+  async update(userToUpdate: UserUpdateDto) {
+    return await this.userModel.findByIdAndUpdate(userToUpdate._id, userToUpdate )
+  }
+
+  async findById(_id: string) {
+    try {
+      return await this.userModel.findOne({ _id }).exec();
+    } catch (error) {
+      throw new NotFoundException(MessagesHelper.USER_NOT_FOUND);
+    }
+  }
+
+  async findAll() {
+    return await this.userModel.find();
   }
 }
