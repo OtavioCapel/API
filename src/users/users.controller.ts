@@ -5,7 +5,6 @@ import { AuthGuard } from '@nestjs/passport/dist';
 import { UserUpdateDto } from './dto/user-update.dto';
 
 @Controller('users')
-//@UseGuards(AuthGuard('jwt'))
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -15,16 +14,19 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuard('jwt'))
   findById(@Param() { id } ) {
     return this.usersService.findById(id);
   }
 
   @Put()
+  @UseGuards(AuthGuard('jwt'))
   updateUser(@Body() updateUserDto: UserUpdateDto){
     return this.usersService.update(updateUserDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   findAll() {
     return this.usersService.findAll();
   }

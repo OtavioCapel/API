@@ -11,8 +11,17 @@ export class User {
   @Prop({ required: true })
   name: string;
 
+  @Prop({ default: true })
+  active: boolean;
+
   @Prop({ required: true, unique: true })
   email: string;
+  
+  @Prop()
+  profilePicture: string;
+
+  @Prop()
+  photos: Array<any>;
 
   @Prop({ required: true })
   password: string;
@@ -28,12 +37,6 @@ export class User {
 
   @Prop({ default: [] }) // TO DO - reference to another schema 
   closedFriends: Array<any>;
-  
-  @Prop({ default: 0 })
-  followersQuantity: number;
-
-  @Prop({ default: 0 }) 
-  followingQuantity: number;
 
   @Prop({ default: Date.now() }) 
   createdAt: Date;
