@@ -18,7 +18,6 @@ export class UsersController {
   @UseGuards(AuthGuardDecodeJWT) //AuthGuardDecodeJWT Auth do decode JWT inside in req.headers
   @UseGuards(AuthGuard('jwt'))
   findById(@Param() { id }, @Request() req ) {
-    console.log('req>>>', req.user)
     return this.usersService.findById(id);
   }
 

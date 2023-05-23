@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { FriendsModule } from './friends/friends.module';
 
 @Module({
   imports: [
@@ -10,7 +11,8 @@ import { AuthModule } from './auth/auth.module';
       'mongodb+srv://empresa-gtd:1wIZBlJdcCpryXhC@cluster0.1bsze.mongodb.net/?retryWrites=true&w=majority'
     ),
     UsersModule,
-    AuthModule
+    AuthModule,
+    FriendsModule
   ],
   controllers: [],
   providers: []

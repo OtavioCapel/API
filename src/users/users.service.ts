@@ -13,9 +13,11 @@ export class UsersService {
 
   async createUser(dto: UserResponseDto) {
     const emailAlreadyInUse = await this.findByEmail(dto.email);
+    
     if(emailAlreadyInUse) {
       throw new BadRequestException(MessagesHelper.EMAIL_ALREADY_IN_USE);
     }
+    
     const newUser = new this.userModel(dto);
     const saltRounds = 10;
     newUser.password = hashSync(newUser.password, saltRounds);
