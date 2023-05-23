@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Request, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 import { UserResponseDto } from './dto/user-response.dto';
 import { UsersService } from './users.service';
 import { AuthGuard } from '@nestjs/passport/dist';
 import { UserUpdateDto } from './dto/user-update.dto';
+import { AuthGuardDecodeJWT } from 'src/shared/guards/auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -14,8 +15,10 @@ export class UsersController {
   }
 
   @Get(':id')
+  @UseGuards(AuthGuardDecodeJWT) //AuthGuardDecodeJWT Auth do decode JWT inside in req.headers
   @UseGuards(AuthGuard('jwt'))
-  findById(@Param() { id } ) {
+  findById(@Param() { id }, @Request() req ) {
+    console.log('req>>>', req.user)
     return this.usersService.findById(id);
   }
 
